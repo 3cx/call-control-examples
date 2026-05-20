@@ -1,0 +1,11 @@
+node_modules
+.idea
+.vscode
+.eslintcache
+index.json
+output.wav
+yarn-error.log
+install-state.gz
+*service-account*.json
+*-424807.json
+outbound-caller-424807.json

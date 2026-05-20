@@ -1,0 +1,23 @@
+{
+    "name": "@3cx/3cx-call-control-apps",
+    "scripts": {
+        "build-lib": "yarn workspace cc-component-lib build",
+        "start-server": "yarn workspace server start",
+        "start-client": "yarn workspace client start",
+        "start-hubspot-client": "yarn workspace calling-integration-sdk-demo-react-ts start",
+        "start": "concurrently \"yarn start-server\" \"yarn start-client\"",
+        "start-hubspot": "concurrently \"yarn start-server\" \"yarn start-hubspot-client\""
+    },
+    "workspaces": [
+        "client",
+        "server",
+        "cc-component-lib",
+        "calling-integration-sdk-demo-react-ts",
+        "call-interceptor"
+    ],
+    "devDependencies": {
+        "concurrently": "^8.2.2",
+        "prettier": "^3.4.2"
+    },
+    "packageManager": "yarn@4.5.1"
+}

@@ -1,0 +1,50 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "dist/server.js",
+  "author": "3CX",
+  "license": "MIT",
+  "scripts": {
+    "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
+    "build": "tsc -p .",
+    "start": "ts-node ./src/index.ts",
+    "tslint": "tslint --project tsconfig.json",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "format": "prettier . --write"
+  },
+  "devDependencies": {
+    "@types/busboy": "^1.5.4",
+    "@types/koa": "^2.15.0",
+    "@types/koa__cors": "^5.0.0",
+    "@types/koa__router": "^12.0.4",
+    "@types/node": "^20.14.2",
+    "@types/pumpify": "^1.4.4",
+    "@types/wav": "^1.0.4",
+    "@types/ws": "^8",
+    "chalk": "4",
+    "eslint": "^9.11.1",
+    "ts-node": "^10.9.2",
+    "tslib": "^2.6.2",
+    "typescript-eslint": "^8.8.0"
+  },
+  "dependencies": {
+    "@google-cloud/speech": "^6.7.0",
+    "@google-cloud/text-to-speech": "^5.8.0",
+    "@google-cloud/vertexai": "^1.9.2",
+    "@koa/bodyparser": "^5.1.1",
+    "@koa/cors": "^5.0.0",
+    "@koa/router": "^12.0.1",
+    "axios": "^1.7.2",
+    "busboy": "^1.6.0",
+    "dotenv": "^16.4.5",
+    "koa": "^2.15.3",
+    "koa-body": "^6.0.1",
+    "node-cache": "^5.1.2",
+    "reflect-metadata": "^0.2.2",
+    "tsyringe": "^4.8.0",
+    "typescript": "^5.6.3",
+    "wav": "^1.0.2",
+    "ws": "^8.18.0"
+  }
+}

@@ -1,0 +1,9 @@
+export declare const PARTICIPANT_CONTROL_DROP = "drop";
+export declare const PARTICIPANT_CONTROL_ANSWER = "answer";
+export declare const PARTICIPANT_CONTROL_DIVERT = "divert";
+export declare const PARTICIPANT_CONTROL_ROUTE_TO = "routeto";
+export declare const PARTICIPANT_CONTROL_TRANSFER_TO = "transferto";
+export declare const PARTICIPANT_CONTROL_ATTACH_DATA = "attach_participant_data";
+export declare const PARTICIPANT_STATUS_CONNECTED = "Connected";
+export declare const PARTICIPANT_STATUS_DIALING = "Dialing";
+export declare const PARTICIPANT_STATUS_RINGING = "Ringing";

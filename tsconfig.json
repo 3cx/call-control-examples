@@ -1,0 +1,19 @@
+{
+  "references": [
+    {
+      "path": "./client"
+    },
+    {
+      "path": "./server"
+    },
+    {
+      "path": "./cc-component-lib"
+    },
+    {
+      "path": "./calling-integration-sdk-demo-react-ts"
+    }
+  ],
+  "files": [],
+  "include": [],
+  "exclude": ["**/node_modules"]
+}
