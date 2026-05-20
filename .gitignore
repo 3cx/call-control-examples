@@ -1,6 +1,7 @@
 node_modules
 .idea
 .vscode
+.env
 .eslintcache
 index.json
 output.wav
