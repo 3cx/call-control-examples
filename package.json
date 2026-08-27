@@ -23,5 +23,5 @@
         "ip-address": "10.5.0",
         "tar": "7.5.22"
     },
-    "packageManager": "yarn@4.5.1"
+    "packageManager": "yarn@4.18.0"
 }
