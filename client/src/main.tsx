@@ -7,8 +7,6 @@ import Nav from './components/nav';
 import ConnectForm from './components/connect-form';
 import PrivateRoute from './components/private-route';
 import { APP_TYPE_CUSTOM_IVR, APP_TYPE_DIALER, APP_TYPE_OUTBOUND_CAMPAIGN } from './constants';
-import { ErrorBoundary } from './error-boundary';
-
 
 const router = createBrowserRouter([
   {

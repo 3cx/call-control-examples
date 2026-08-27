@@ -1,6 +1,6 @@
 import { injectable, singleton } from 'tsyringe';
-import textToSpeech from '@google-cloud/text-to-speech';
-import speech from '@google-cloud/speech';
+import { TextToSpeechClient } from '@google-cloud/text-to-speech';
+import { SpeechClient } from '@google-cloud/speech';
 import tts from '@google-cloud/text-to-speech/build/protos/protos';
 import ISynthesizeSpeechRequest = tts.google.cloud.texttospeech.v1.ISynthesizeSpeechRequest;
 import * as protosTypes from '@google-cloud/speech/build/protos/protos';
@@ -10,47 +10,65 @@ import chalk = require('chalk');
 @injectable()
 @singleton()
 export class AiIntegrationService {
-  private clientTTS = new textToSpeech.TextToSpeechClient();
-  private clientSTT = new speech.SpeechClient();
-  private vertexAI = new VertexAI({ project: process.env.PROJECT_ID! });
+  private clientTTS?: TextToSpeechClient;
+  private clientSTT?: SpeechClient;
+  private vertexAI?: VertexAI;
+
+  private getProjectId(): string {
+    const projectId = process.env.PROJECT_ID;
+    if (!projectId) {
+      throw new Error(
+        'Custom IVR AI features require PROJECT_ID in server/.env. See server/.env.example.',
+      );
+    }
+    return projectId;
+  }
+
+  private getClientTTS() {
+    this.clientTTS ??= new TextToSpeechClient();
+    return this.clientTTS;
+  }
+
+  private getClientSTT() {
+    this.clientSTT ??= new SpeechClient();
+    return this.clientSTT;
+  }
+
+  private getVertexAI() {
+    this.vertexAI ??= new VertexAI({ project: this.getProjectId() });
+    return this.vertexAI;
+  }
 
   public createSpeech(input: string) {
     try {
       const request: ISynthesizeSpeechRequest = {
         input: { text: input },
-        // Select the language and SSML voice gender (optional)
         voice: { languageCode: 'en-US', ssmlGender: 'FEMALE' },
-        // select the type of audio encoding
         audioConfig: { audioEncoding: 'LINEAR16', sampleRateHertz: 8000 },
       };
-      return this.clientTTS.synthesizeSpeech(request);
+      return this.getClientTTS().synthesizeSpeech(request);
     } catch (e) {
       console.error(chalk.red('🚨 Google Text to Speech API req error', e));
-      //throw new Error('Google Text to Speech API req error')
     }
   }
 
   public createRecognizeStream() {
-    const encoding = 'LINEAR16';
-    const sampleRateHertz = 8000;
-    const languageCode = 'en-US';
-
     const request: protosTypes.google.cloud.speech.v1.IStreamingRecognitionConfig = {
       config: {
-        encoding: encoding,
-        sampleRateHertz: sampleRateHertz,
-        languageCode: languageCode,
+        encoding: 'LINEAR16',
+        sampleRateHertz: 8000,
+        languageCode: 'en-US',
         model: 'phone_call',
         useEnhanced: true,
       },
       interimResults: true,
     };
 
-    return this.clientSTT.streamingRecognize(request, {});
+    return this.getClientSTT().streamingRecognize(request, {});
   }
 
   public createChatCompletion() {
-    const generativeModel = this.vertexAI.getGenerativeModel({
+    const generativeModel = this.getVertexAI().getGenerativeModel({
       model: 'gemini-2.0-flash-001',
     });
 

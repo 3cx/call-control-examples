@@ -9,8 +9,8 @@ import * as chalk from 'chalk';
 dotenv.config();
 
 const app = new Koa();
-const port = process.env.SERVER_PORT;
-const host = process.env.SERVER_HOST;
+const port = Number(process.env.SERVER_PORT ?? 8080);
+const host = process.env.SERVER_HOST ?? '0.0.0.0';
 const mainRouter = initMainRouter();
 
 app

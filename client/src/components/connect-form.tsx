@@ -4,7 +4,7 @@ import { Navigate } from 'react-router-dom';
 import { getEnumeredType, getStatusFunc, stringifyError } from '../shared';
 import { useState } from 'react';
 import { ConnectFormProps } from '../types';
-import { ButtonForms, Error } from 'cc-component-lib';
+import { ButtonForms } from 'cc-component-lib';
 import { APP_TYPE_CUSTOM_IVR, APP_TYPE_DIALER, APP_TYPE_OUTBOUND_CAMPAIGN } from '../constants';
 import { ErrorPortal } from '../error-portal';
 

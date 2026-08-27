@@ -1,4 +1,7 @@
 node_modules
+client/dist
+server/dist
+calling-integration-sdk-demo-react-ts/dist
 .idea
 .vscode
 .env

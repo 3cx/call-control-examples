@@ -457,12 +457,12 @@ export class CustomIVRAppService {
 
     if (!updatedParticipant) return { updatedParticipant: undefined, outputStream: undefined };
 
-    recognizeStream.on('error', (error) => {
+    recognizeStream.on('error', (error: unknown) => {
       console.error(chalk.red('❌ Google Speech API Stream Error:', error));
       recognizeStream.destroy();
     });
 
-    recognizeStream.on('data', async (chunk) => {
+    recognizeStream.on('data', async (chunk: any) => {
       await this.processTranscription(chunk, updatedParticipant);
     });
 

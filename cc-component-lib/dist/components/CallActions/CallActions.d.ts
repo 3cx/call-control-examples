@@ -1,6 +1,5 @@
 import { DialerState } from '../Dialer/DialerComponent';
 import { CallControlParticipantAction } from '../../types';
-
 type CallActionsProps = {
     state: DialerState;
     onCallAction: (action: CallControlParticipantAction) => void;

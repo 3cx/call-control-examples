@@ -6,5 +6,4 @@ import { Spinner } from './components/Spinner/SpinnerComponent';
 import { TransferComponent } from './components/TransferComponent/TransferComponent';
 import { ButtonForms } from './components/ButtonForms/button-forms';
 import { Error } from './components/Error/error';
-
 export { Dialer, BackSpaceBtn, CallActions, Select, Spinner, TransferComponent, ButtonForms, Error, };

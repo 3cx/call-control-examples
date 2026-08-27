@@ -1,5 +1,4 @@
 import { DNDevice } from '../../types';
-
 interface SelectProps {
     title?: string;
     data: DNDevice[];

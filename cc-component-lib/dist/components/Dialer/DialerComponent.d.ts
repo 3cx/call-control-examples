@@ -1,5 +1,4 @@
 import { CallControlParticipantAction, CallingExtensionsContract, DNDevice } from '../../types';
-
 export interface DialerProps {
     eventSourceUrl: string;
     devices: DNDevice[];
