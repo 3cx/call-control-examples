@@ -18,11 +18,11 @@ import {
   WS_CLOSE_REASON_TERMINATE,
 } from '../../constants';
 import { determineOperation, fullInfoToObject, set, useWebsocketListeners } from '../../utils';
-import * as EventEmitter from 'events';
+import EventEmitter from 'events';
 import axios, { isAxiosError } from 'axios';
 import { BadRequest, InternalServerError } from '../../Error';
 import { WebSocket } from 'ws';
-import * as chalk from 'chalk';
+import chalk from 'chalk';
 
 @injectable()
 @singleton()

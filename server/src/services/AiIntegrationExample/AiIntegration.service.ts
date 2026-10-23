@@ -5,7 +5,7 @@ import tts from '@google-cloud/text-to-speech/build/protos/protos';
 import ISynthesizeSpeechRequest = tts.google.cloud.texttospeech.v1.ISynthesizeSpeechRequest;
 import * as protosTypes from '@google-cloud/speech/build/protos/protos';
 import { VertexAI } from '@google-cloud/vertexai';
-import chalk = require('chalk');
+import chalk from 'chalk';
 
 @injectable()
 @singleton()

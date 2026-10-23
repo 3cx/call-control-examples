@@ -26,7 +26,7 @@ export const TransferComponent: React.FC<TransferComponentProps> = ({
       <input
         id="transferField"
         ref={inputRef}
-        className="focus:outline-none text-center h-[34px] bg-transparent border-b border-darklight"
+        className="focus:outline-hidden text-center h-[34px] bg-transparent border-b border-darklight"
         value={transferNumber}
         onChange={(e) => setTransferNumber(e.target.value)}
       ></input>

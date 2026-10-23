@@ -65,7 +65,7 @@ export default function ConnectForm({ appType }: ConnectFormProps) {
         return;
       }
       await refetch();
-    } catch (err) {
+    } catch {
       setServerError('Failed to connect to Application server');
     }
   };
@@ -82,7 +82,7 @@ export default function ConnectForm({ appType }: ConnectFormProps) {
             <form className="flex flex-col w-full" onSubmit={handleSubmit(onSubmit)}>
               <label htmlFor="pbxBase">PBX Base URL</label>
               <input
-                className="w-full h-[36px] rounded p-1 text-gray-500 font-medium text-sm bg-gray-100 shadow appearance-none"
+                className="w-full h-[36px] rounded-sm p-1 text-gray-500 font-medium text-sm bg-gray-100 shadow-sm appearance-none"
                 placeholder="https://pbx.3cx.com"
                 id="pbxBase"
                 {...register('pbxBase', { required: 'Required' })}
@@ -92,7 +92,7 @@ export default function ConnectForm({ appType }: ConnectFormProps) {
                 APP ID
               </label>
               <input
-                className="w-full h-[36px] rounded p-1 text-gray-500 font-medium text-sm bg-gray-100 shadow appearance-none"
+                className="w-full h-[36px] rounded-sm p-1 text-gray-500 font-medium text-sm bg-gray-100 shadow-sm appearance-none"
                 id="appId"
                 placeholder="APP2JAdaOIWKdasG23KAL"
                 {...register('appId', { required: 'Required' })}
@@ -105,7 +105,7 @@ export default function ConnectForm({ appType }: ConnectFormProps) {
                 APP Secret
               </label>
               <input
-                className="w-full h-[36px] mb-2 rounded p-1 text-gray-500 font-medium text-sm bg-gray-100 shadow appearance-none"
+                className="w-full h-[36px] mb-2 rounded-sm p-1 text-gray-500 font-medium text-sm bg-gray-100 shadow-sm appearance-none"
                 placeholder="APPSEC3123klJKSADjasdk"
                 id="appSecret"
                 {...register('appSecret', { required: 'Required' })}></input>

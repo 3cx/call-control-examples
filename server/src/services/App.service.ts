@@ -1,8 +1,8 @@
 import { ConnectAppRequest, DialingSetup, ControlParticipantRequest } from '../types';
 import { AppType } from '../constants';
-import * as busboy from 'busboy';
+import busboy from 'busboy';
 import { inject, injectable, singleton } from 'tsyringe';
-import * as wav from 'wav';
+import wav from 'wav';
 import { ExtendableContext } from 'koa';
 import { CustomIVRAppService } from './CustomIVRAppExample/CustomIVRApp.service';
 import { OutboundCampaignService } from './OutboundCampaignExample/OutboundCampaignApp.service';

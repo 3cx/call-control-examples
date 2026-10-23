@@ -12,8 +12,8 @@ import {
   WS_CLOSE_REASON_TERMINATE,
 } from '../constants';
 import { BadRequest, InternalServerError } from '../Error';
-import * as WebSocket from 'ws';
-import * as chalk from 'chalk';
+import WebSocket from 'ws';
+import chalk from 'chalk';
 
 @injectable()
 export class ExternalApiService {

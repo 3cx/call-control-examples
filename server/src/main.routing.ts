@@ -1,7 +1,8 @@
-import * as Router from '@koa/router';
+import Router from '@koa/router';
 import { container } from 'tsyringe';
 import { AppService } from './services/App.service';
 import { AppError, InternalServerError } from './Error';
+import { ConnectAppRequest, ControlParticipantRequest, DialingSetup } from './types';
 
 export default function initMainRouting() {
   const router = new Router();
@@ -14,7 +15,7 @@ export default function initMainRouting() {
     const queryParam = ctx.query.appId;
     try {
       const intId = parseFloat(queryParam as string);
-      await app.connectApplication(ctx.request.body, intId);
+      await app.connectApplication(ctx.request.body as ConnectAppRequest, intId);
       ctx.res.statusCode = 202;
       ctx.body = {
         message: 'Accepted',
@@ -76,7 +77,7 @@ export default function initMainRouting() {
     const queryParam = ctx.query.appId;
     try {
       const intId = parseFloat(queryParam as string);
-      app.startDialing(ctx.request.body, intId);
+      app.startDialing(ctx.request.body as DialingSetup, intId);
       ctx.res.statusCode = 204;
       ctx.body = {
         message: 'Accepted',
@@ -97,7 +98,7 @@ export default function initMainRouting() {
     const queryParam = ctx.query.appId;
     try {
       const intId = parseFloat(queryParam as string);
-      const resp = await app.controlParticipant(ctx.request.body, intId);
+      const resp = await app.controlParticipant(ctx.request.body as ControlParticipantRequest, intId);
       ctx.res.statusCode = 204;
       ctx.body = {
         data: resp?.data,
@@ -140,7 +141,7 @@ export default function initMainRouting() {
 
   router.post('/api/dialer/setdevice', async (ctx, next) => {
     try {
-      const id = app.setDialerActiveDevice(ctx.request.body);
+      const id = app.setDialerActiveDevice(ctx.request.body as { activeDeviceId: string });
       ctx.res.statusCode = 202;
       ctx.body = {
         activeDeviceId: id,

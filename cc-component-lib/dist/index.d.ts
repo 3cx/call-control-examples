@@ -7,3 +7,4 @@ import { TransferComponent } from './components/TransferComponent/TransferCompon
 import { ButtonForms } from './components/ButtonForms/button-forms';
 import { Error } from './components/Error/error';
 export { Dialer, BackSpaceBtn, CallActions, Select, Spinner, TransferComponent, ButtonForms, Error, };
+export type * from './types';

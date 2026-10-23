@@ -20,7 +20,7 @@ export const ButtonForms: React.FC<BtnFormProps> = ({
       disabled={disabled}
       onClick={onBtnClick}
       type={type}
-      className="flex justify-center items-center rounded w-[150px] h-[45px] bg-gray-800 hover:bg-gray-700 text-white disabled:bg-gray-400 disabled:text-gray-600"
+      className="flex justify-center items-center rounded-sm w-[150px] h-[45px] bg-gray-800 hover:bg-gray-700 text-white disabled:bg-gray-400 disabled:text-gray-600"
     >
       {isLoading ? <Spinner /> : label}
     </button>

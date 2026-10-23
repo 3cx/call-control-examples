@@ -27,7 +27,7 @@ export default function Instructions({
               d="m16 14.619-16-8V21c0 .379.214.725.553.895L16 29.619v-15Z"
             />
           </svg>
-          <div className="flex-grow truncate">
+          <div className="grow truncate">
             <div className="w-full sm:flex justify-between items-center mb-3">
               <h2 className="text-2xl leading-snug font-extrabold text-gray-50 truncate mb-1 sm:mb-0">
                 Instructions

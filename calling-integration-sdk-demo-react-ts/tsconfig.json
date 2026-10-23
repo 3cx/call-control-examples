@@ -2,7 +2,8 @@
   "compilerOptions": {
     "noEmit": true,
     "jsx": "react-jsx",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
+    "verbatimModuleSyntax": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
@@ -11,6 +12,7 @@
     "module": "esnext",
     "target": "esnext",
     "isolatedModules": true,
-    "noErrorTruncation": true
+    "noErrorTruncation": true,
+    "types": ["node"]
   }
 }

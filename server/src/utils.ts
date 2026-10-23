@@ -1,8 +1,8 @@
 /* tslint:disable:max-classes-per-file */
 import { EventEmitter, Transform, TransformCallback } from 'stream';
 import { CallControl, CallParticipant, DNDevice, DNInfo, DnInfoModel } from './types';
-import * as WebSocket from 'ws';
-import * as chalk from 'chalk';
+import WebSocket from 'ws';
+import chalk from 'chalk';
 
 export function readChunks(reader: ReadableStreamDefaultReader) {
   return {

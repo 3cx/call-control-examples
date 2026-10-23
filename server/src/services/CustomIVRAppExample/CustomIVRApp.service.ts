@@ -42,7 +42,7 @@ import { ExternalApiService } from '../ExternalApi.service';
 import { BadRequest, InternalServerError } from '../../Error';
 import { WebSocket } from 'ws';
 import { AiIntegrationService } from '../AiIntegrationExample/AiIntegration.service';
-import * as chalk from 'chalk';
+import chalk from 'chalk';
 
 @injectable()
 @singleton()
@@ -400,7 +400,7 @@ export class CustomIVRAppService {
       const response = await responseChat.sendMessage(transcription);
 
       const parts = response?.response?.candidates?.[0]?.content?.parts || [];
-      let responseText = parts
+      const responseText = parts
         .map((part) => part.text?.replace(/\*+/gm, ''))
         .join(' ')
         .trim();

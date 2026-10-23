@@ -19,3 +19,5 @@ export {
   ButtonForms,
   Error,
 };
+
+export type * from "./types";

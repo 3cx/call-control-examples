@@ -3,8 +3,11 @@ import { useMemo, useState } from "react";
 // import CallingExtensions from "@hubspot/calling-extensions-sdk/src/CallingExtensions";
 // import { callStatus } from "@hubspot/calling-extensions-sdk/src/Constants";
 
-// @ts-expect-error module not typed
-import CallingExtensions from "@hubspot/calling-extensions-sdk";
+import HubSpotCallingExtensions from "@hubspot/calling-extensions-sdk";
+
+// The SDK now ships its own types, but the payloads below are still loosely typed (e.g. no externalCallId)
+const CallingExtensions: any = HubSpotCallingExtensions;
+type CallingExtensions = any;
 
 // @TODO Move it to CallingExtensions and export it once migrated to typescript
 type ObjectCoordinates = {

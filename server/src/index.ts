@@ -1,11 +1,11 @@
 import './services/dependency-injection';
 import Koa from 'koa';
 import { bodyParser } from '@koa/bodyparser';
-import * as cors from '@koa/cors';
+import cors from '@koa/cors';
 import initMainRouter from './main.routing';
 import sseMiddleware from './sse.middleware';
-import * as dotenv from 'dotenv';
-import * as chalk from 'chalk';
+import dotenv from 'dotenv';
+import chalk from 'chalk';
 dotenv.config();
 
 const app = new Koa();

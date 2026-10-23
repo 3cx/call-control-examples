@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { type SubmitHandler, useForm } from "react-hook-form";
 import { Error, ButtonForms } from "cc-component-lib";
 import { useQuery } from "@tanstack/react-query";
 import { getStatusFunc, stringifyError } from "../../utils";
@@ -56,7 +56,7 @@ export const Connect: React.FC = () => {
       >
         <label htmlFor="pbxBase">PBX Base URL</label>
         <input
-          className="w-full h-[36px] rounded p-1 text-gray-500 font-medium text-sm bg-gray-100 shadow appearance-none"
+          className="w-full h-[36px] rounded-sm p-1 text-gray-500 font-medium text-sm bg-gray-100 shadow-sm appearance-none"
           placeholder="https://pbx.3cx.com"
           id="pbxBase"
           {...register("pbxBase", { required: "Required" })}
@@ -66,7 +66,7 @@ export const Connect: React.FC = () => {
         )}
         <label htmlFor="appId">APP ID</label>
         <input
-          className="w-full h-[36px] rounded p-1 text-gray-500 font-medium text-sm bg-gray-100 shadow appearance-none"
+          className="w-full h-[36px] rounded-sm p-1 text-gray-500 font-medium text-sm bg-gray-100 shadow-sm appearance-none"
           id="appId"
           placeholder="APP2JAdaOIWKdasG23KAL"
           {...register("appId", { required: "Required" })}
@@ -76,7 +76,7 @@ export const Connect: React.FC = () => {
         )}
         <label htmlFor="appSecret">APP Secret</label>
         <input
-          className="w-full h-[36px] mb-2 rounded p-1 text-gray-500 font-medium text-sm bg-gray-100 shadow appearance-none"
+          className="w-full h-[36px] mb-2 rounded-sm p-1 text-gray-500 font-medium text-sm bg-gray-100 shadow-sm appearance-none"
           placeholder="APPSEC3123klJKSADjasdk"
           id="appSecret"
           {...register("appSecret", { required: "Required" })}

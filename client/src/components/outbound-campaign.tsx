@@ -45,7 +45,7 @@ export default function OutboundCampaign({ appType }: ConnectFormProps) {
         <label>Call Destinations</label>
         <textarea
           {...register('sources', { required: 'Required' })}
-          className="w-full h-[176px] resize-none rounded p-1 text-gray-500 font-medium text-sm bg-gray-100 shadow appearance-none"
+          className="w-full h-[176px] resize-none rounded-sm p-1 text-gray-500 font-medium text-sm bg-gray-100 shadow-sm appearance-none"
         ></textarea>
         <p
           id="helper-text-explanation"

@@ -81,7 +81,7 @@ export default function CustomIvr() {
           </label>
           <input
             disabled={aiModeOn}
-            className="h-[36px] rounded p-1 text-gray-500 font-medium text-sm bg-gray-100 shadow appearance-none disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed"
+            className="h-[36px] rounded-sm p-1 text-gray-500 font-medium text-sm bg-gray-100 shadow-sm appearance-none disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed"
             id={`dtmf${i}`}
             {...register(`keyCommands.${i}` as 'keyCommands')}
           />
@@ -92,14 +92,14 @@ export default function CustomIvr() {
   }
   return (
     <section className="flex flex-row gap-10">
-      <div className="bg-white rounded px-8 mb-4 flex flex-col w-3/5">
+      <div className="bg-white rounded-sm px-8 mb-4 flex flex-col w-3/5">
         {serverError && <Error message={serverError} />}
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="inline-flex items-center mb-2">
             <label className="flex items-center cursor-pointer relative">
               <input
                 type="checkbox"
-                className="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-slate-300 checked:bg-slate-800 checked:border-slate-800"
+                className="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded-sm shadow-sm hover:shadow-md border border-slate-300 checked:bg-slate-800 checked:border-slate-800"
                 id="check"
                 {...register('aiModeOn')}
               />
@@ -147,7 +147,7 @@ export default function CustomIvr() {
                   accept=".wav"
                   aria-describedby="file-helper"
                   disabled={aiModeOn}
-                  className="w-full text-gray-500 font-medium text-sm bg-gray-100 shadow appearance-none file:cursor-pointer cursor-pointer file:border-0 file:py-2 file:px-4 file:mr-4 file:bg-gray-800 file:hover:bg-gray-700 file:text-white rounded disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed"
+                  className="w-full text-gray-500 font-medium text-sm bg-gray-100 shadow-sm appearance-none file:cursor-pointer cursor-pointer file:border-0 file:py-2 file:px-4 file:mr-4 file:bg-gray-800 file:hover:bg-gray-700 file:text-white rounded-sm disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed"
                   {...register('wavSource')}
                 />
                 <p

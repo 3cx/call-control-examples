@@ -1,6 +1,28 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+/* Tailwind v3 compatibility: v4 changed the default border color to currentColor and button cursor to default */
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+@theme {
+  --color-darkBg: #212121;
+  --color-darklight: #403f3f;
+  --color-bghover: #666565;
+  --color-tsxblue: #2196f3;
+}
+
 @layer components {
   .btn-dialer {
     @apply flex flex-col justify-center items-center disabled:opacity-15 enabled:hover:bg-darklight; 

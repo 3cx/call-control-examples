@@ -2,8 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import { Dialer } from "cc-component-lib";
 import { getStatusFunc } from "../../utils";
 import { useCallback } from "react";
-import { CallingExtensionsContract } from "../../hooks/useCti";
-import { CallControlParticipantAction } from "cc-component-lib/dist/types";
+import type { CallingExtensionsContract } from "../../hooks/useCti";
+import type { CallControlParticipantAction } from "cc-component-lib";
 
 interface CallScreenProps {
   cti: CallingExtensionsContract;
@@ -23,7 +23,7 @@ export const CallScreen: React.FC<CallScreenProps> = ({
 
   const onMakeCall = useCallback((dest?: string) => {
     if (dest === undefined) {
-      cti.sendError(`[MakeCall] DestinationNumber is missing`);
+      cti.sendError({ message: `[MakeCall] DestinationNumber is missing` });
       return Promise.reject();
     }
     return fetch(`${process.env.REACT_APP_SERVER_BASE}/api/dialing?appId=2`, {
@@ -38,7 +38,7 @@ export const CallScreen: React.FC<CallScreenProps> = ({
   }, []);
   const onDeviceSelect = useCallback((id: string) => {
     if (id === undefined) {
-      cti.sendError(`[DeviceSelect] Device Id is missing`);
+      cti.sendError({ message: `[DeviceSelect] Device Id is missing` });
       return Promise.reject();
     }
     return fetch(`${process.env.REACT_APP_SERVER_BASE}/api/dialer/setdevice`, {
@@ -54,9 +54,9 @@ export const CallScreen: React.FC<CallScreenProps> = ({
   const onControlParticipant = useCallback(
     (operation: CallControlParticipantAction, id?: number, dest?: string) => {
       if (operation === undefined || id === undefined) {
-        cti.sendError(
-          `[ControlParticipant] Some of required fields are missing`
-        );
+        cti.sendError({
+          message: `[ControlParticipant] Some of required fields are missing`,
+        });
         return Promise.reject();
       }
       return fetch(

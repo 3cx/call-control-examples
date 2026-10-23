@@ -1,4 +1,4 @@
-import { AppStatus } from './types/externalAppTypes';
+import type { AppStatus } from './types/externalAppTypes';
 
 export const getStatusFunc = () => {
   const getStatus = async () => {

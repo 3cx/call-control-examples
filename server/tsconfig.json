@@ -4,7 +4,7 @@
         "experimentalDecorators": true,
         "importHelpers": true,
         "module": "commonjs",
-        "moduleResolution": "node",
+        "moduleResolution": "bundler",
         "sourceMap": true,
         "target": "es2018",
         "skipLibCheck": true,

@@ -390,7 +390,7 @@ export const Dialer: React.FC<DialerProps> = ({
           <div className="flex justify-center items-end">
             <input
               ref={inputRef}
-              className="bg-transparent focus:outline-none text-center"
+              className="bg-transparent focus:outline-hidden text-center"
               value={dialedNumber}
               onChange={(e) => setDialed(e.target.value)}
             ></input>

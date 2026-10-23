@@ -1,8 +1,7 @@
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
 import external from "rollup-plugin-peer-deps-external";
-import postcss from "rollup-plugin-postcss";
-import tailwind from "tailwindcss";
+import tailwindcss from "@tailwindcss/vite";
 import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
 
 export default defineConfig({
@@ -14,26 +13,11 @@ export default defineConfig({
       formats: ["cjs", "es"], // Specifies the output formats (CommonJS and ES modules).
     },
     rollupOptions: {
-      plugins: [
-        external(),
-        postcss({
-          plugins: [tailwind],
-          minimize: true,
-          extensions: [".css"],
-          inject: {
-            insertAt: "top",
-          },
-        }),
-      ],
-      external: ["react", "react-dom", "tailwindcss"], // Defines external dependencies for Rollup bundling.
-      output: {
-        globals: {
-          tailwindcss: "tailwindcss",
-        },
-      },
+      plugins: [external()],
+      external: ["react", "react-dom", "react/jsx-runtime"], // Defines external dependencies for Rollup bundling.
     },
     sourcemap: true, // Generates source maps for debugging.
     emptyOutDir: true, // Clears the output directory before building.
   },
-  plugins: [dts(), cssInjectedByJsPlugin()], // Uses the 'vite-plugin-dts' plugin for generating TypeScript declaration files (d.ts).
+  plugins: [tailwindcss(), dts(), cssInjectedByJsPlugin()], // Uses the 'vite-plugin-dts' plugin for generating TypeScript declaration files (d.ts).
 });

@@ -1,4 +1,4 @@
-import * as NodeCache from 'node-cache'
+import NodeCache from 'node-cache'
 import { injectable, singleton } from 'tsyringe'
 import { ConnectAppRequest } from '../types'
 import { AppType } from '../constants'

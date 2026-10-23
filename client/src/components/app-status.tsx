@@ -106,7 +106,7 @@ export default function AppStatus({ appType }: ConnectFormProps) {
   }
 
   return (
-    <div className="w-full whitespace-normal break-words rounded-lg border border-blue-gray-50 bg-white p-4 font-sans text-sm font-normal text-blue-gray-500 shadow-lg shadow-blue-gray-500/10 focus:outline-none">
+    <div className="w-full whitespace-normal break-words rounded-lg border border-blue-gray-50 bg-white p-4 font-sans text-sm font-normal text-blue-gray-500 shadow-lg shadow-blue-gray-500/10 focus:outline-hidden">
       {data?.wsConnected === false && (
         <ErrorPortal message="Experiencing problems with Websocket Connection, trying to reconnect..." />
       )}
@@ -169,7 +169,7 @@ export default function AppStatus({ appType }: ConnectFormProps) {
       </div>
       <button
         disabled={!data?.connected}
-        className="mt-10 rounded w-[150px] h-[36px] bg-red-500 hover:bg-red-700 text-white cursor-pointer disabled:bg-gray-200 transform active:scale-95 transition-transform"
+        className="mt-10 rounded-sm w-[150px] h-[36px] bg-red-500 hover:bg-red-700 text-white cursor-pointer disabled:bg-gray-200 transform active:scale-95 transition-transform"
         type="button"
         onClick={() => onDisconnect()}
       >
