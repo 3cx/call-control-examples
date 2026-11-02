@@ -9,7 +9,7 @@
   "bracketSpacing": true,
   "jsxSingleQuote": false,
   "jsxBracketSameLine": false,
-  "endOfLine": "lf",
+  "endOfLine": "auto",
   "quoteProps": "as-needed",
   "proseWrap": "preserve",
   "embeddedLanguageFormatting": "auto"

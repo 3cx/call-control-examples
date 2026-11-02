@@ -1,13 +1,13 @@
-import "./style.css";
+import './style.css';
 
-import { Dialer } from "./components/Dialer/DialerComponent";
-import { BackSpaceBtn } from "./components/BackSpaceBtn/BackSpaceBtnComponent";
-import { CallActions } from "./components/CallActions/CallActions";
-import { Select } from "./components/Select/SelectComponent";
-import { Spinner } from "./components/Spinner/SpinnerComponent";
-import { TransferComponent } from "./components/TransferComponent/TransferComponent";
-import { ButtonForms } from "./components/ButtonForms/button-forms";
-import { Error } from "./components/Error/error";
+import { Dialer } from './components/Dialer/DialerComponent';
+import { BackSpaceBtn } from './components/BackSpaceBtn/BackSpaceBtnComponent';
+import { CallActions } from './components/CallActions/CallActions';
+import { Select } from './components/Select/SelectComponent';
+import { Spinner } from './components/Spinner/SpinnerComponent';
+import { TransferComponent } from './components/TransferComponent/TransferComponent';
+import { ButtonForms } from './components/ButtonForms/button-forms';
+import { Error } from './components/Error/error';
 
 export {
   Dialer,
@@ -20,4 +20,4 @@ export {
   Error,
 };
 
-export type * from "./types";
+export type * from './types';

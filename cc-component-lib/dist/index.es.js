@@ -18,7 +18,7 @@ var s = "drop", c = "answer", l = "divert", u = "transferto", d = "Connected", f
 		handler: () => u(!1)
 	});
 	let [f, p] = i(s ? n.find((e) => e.device_id === s) : void 0), h = (e) => {
-		p(e), c && c(e.device_id), u(!1);
+		p(e), c?.(e.device_id), u(!1);
 	};
 	return t(() => {
 		if (s && n) {

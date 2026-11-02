@@ -5,26 +5,19 @@ import {
   PARTICIPANT_STATUS_CONNECTED,
   PARTICIPANT_STATUS_DIALING,
   PARTICIPANT_STATUS_RINGING,
-} from "../../constants";
-import { Select } from "../Select/SelectComponent";
-import {
-  ReactNode,
-  useCallback,
-  useEffect,
-  useReducer,
-  useRef,
-  useState,
-} from "react";
+} from '../../constants';
+import { Select } from '../Select/SelectComponent';
+import { ReactNode, useCallback, useEffect, useReducer, useRef, useState } from 'react';
 import {
   CallControlParticipantAction,
   CallingExtensionsContract,
   CurrentCall,
   DNDevice,
-} from "../../types";
-import { CallActions } from "../CallActions/CallActions";
-import { TransferComponent } from "../TransferComponent/TransferComponent";
-import { BackSpaceBtn } from "../BackSpaceBtn/BackSpaceBtnComponent";
-import { Spinner } from "../Spinner/SpinnerComponent";
+} from '../../types';
+import { CallActions } from '../CallActions/CallActions';
+import { TransferComponent } from '../TransferComponent/TransferComponent';
+import { BackSpaceBtn } from '../BackSpaceBtn/BackSpaceBtnComponent';
+import { Spinner } from '../Spinner/SpinnerComponent';
 
 export interface DialerProps {
   eventSourceUrl: string;
@@ -37,7 +30,7 @@ export interface DialerProps {
   onCallControlParticipant: (
     action: CallControlParticipantAction,
     participantid?: number,
-    dest?: string
+    dest?: string,
   ) => Promise<Response>;
   extensions?: CallingExtensionsContract;
   engagementId?: number | null;
@@ -53,13 +46,13 @@ export enum DialerState {
 function callStateReducer(
   state: CurrentCall | undefined,
   action: {
-    type: "full_update" | "attach_data";
+    type: 'full_update' | 'attach_data';
     newState?: CurrentCall;
-    attachedData?: CurrentCall["attachedData"];
-  }
+    attachedData?: CurrentCall['attachedData'];
+  },
 ): CurrentCall | undefined {
   switch (action.type) {
-    case "full_update": {
+    case 'full_update': {
       if (action.newState !== undefined) {
         return {
           ...action.newState,
@@ -72,7 +65,7 @@ function callStateReducer(
         return undefined;
       }
     }
-    case "attach_data": {
+    case 'attach_data': {
       if (action.attachedData !== undefined && state !== undefined) {
         return {
           ...state,
@@ -97,18 +90,15 @@ export const Dialer: React.FC<DialerProps> = ({
   sourceCallerId,
   engagementId,
 }) => {
-  const [dialedNumber, setDialed] = useState(phoneNumber ?? "");
+  const [dialedNumber, setDialed] = useState(phoneNumber ?? '');
   const [dialerState, setState] = useState(DialerState.Idle);
   const [currentCalls, setCurrentCalls] = useState<CurrentCall[]>([]);
-  const [callState, dispatchCallState] = useReducer(
-    callStateReducer,
-    undefined
-  );
+  const [callState, dispatchCallState] = useReducer(callStateReducer, undefined);
 
-  const [ccOpertation, setCCOperation] = useState<
-    CallControlParticipantAction | undefined
-  >(undefined);
-  const [operationDestination, setOperationDestination] = useState("");
+  const [ccOpertation, setCCOperation] = useState<CallControlParticipantAction | undefined>(
+    undefined,
+  );
+  const [operationDestination, setOperationDestination] = useState('');
 
   const [isOperationInProcess, setIsOperationInProccess] = useState(false);
   const [performingAnswer, setPerformingAnswer] = useState(false);
@@ -122,7 +112,7 @@ export const Dialer: React.FC<DialerProps> = ({
   useEffect(() => {
     const source = new EventSource(eventSourceUrl);
     source.onopen = () => {
-      console.log("EventSource Connected");
+      console.log('EventSource Connected');
       extensions?.initialized({
         isLoggedIn: true,
         sizeInfo: { width: 400, height: 600 },
@@ -134,13 +124,14 @@ export const Dialer: React.FC<DialerProps> = ({
       try {
         const data = JSON.parse(e.data);
         setCurrentCalls(data.currentCalls);
-      } catch (e) {
+      } catch {
         extensions?.sendError({
-          message: "Failed to parse JSON from EventSource",
+          message: 'Failed to parse JSON from EventSource',
         });
       }
     };
     return () => source.close();
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- subscribe once on mount
   }, []);
 
   useEffect(() => {
@@ -149,25 +140,22 @@ export const Dialer: React.FC<DialerProps> = ({
         handleCallAnswer(phoneNumber);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- only react to a new phoneNumber
   }, [phoneNumber]);
 
   useEffect(() => {
     dispatchCallState({
-      type: "attach_data",
+      type: 'attach_data',
       attachedData: { engagementId },
     });
   }, [engagementId]);
 
   useEffect(() => {
     const connectedCall = currentCalls?.find(
-      (call) => call.status === PARTICIPANT_STATUS_CONNECTED
+      (call) => call.status === PARTICIPANT_STATUS_CONNECTED,
     );
-    const incomingCall = currentCalls?.find(
-      (call) => call.status === PARTICIPANT_STATUS_RINGING
-    );
-    const outgoingCall = currentCalls?.find(
-      (call) => call.status === PARTICIPANT_STATUS_DIALING
-    );
+    const incomingCall = currentCalls?.find((call) => call.status === PARTICIPANT_STATUS_RINGING);
+    const outgoingCall = currentCalls?.find((call) => call.status === PARTICIPANT_STATUS_DIALING);
 
     if (connectedCall && dialerState !== DialerState.Connected) {
       if (dialerState === DialerState.Dialing) {
@@ -175,17 +163,17 @@ export const Dialer: React.FC<DialerProps> = ({
       }
       setDialerState(DialerState.Connected);
 
-      dispatchCallState({ type: "full_update", newState: connectedCall });
+      dispatchCallState({ type: 'full_update', newState: connectedCall });
     }
 
     if (outgoingCall && !callState) {
-      dispatchCallState({ type: "full_update", newState: outgoingCall });
+      dispatchCallState({ type: 'full_update', newState: outgoingCall });
       if (dialerState !== DialerState.Dialing) {
         setDialerState(DialerState.Dialing);
       }
       extensions?.outgoingCall({
         //hubspot outgoing call notify
-        toNumber: outgoingCall.party || "",
+        toNumber: outgoingCall.party || '',
         createEngagement: true,
         fromNumber: sourceCallerId,
       });
@@ -193,7 +181,7 @@ export const Dialer: React.FC<DialerProps> = ({
 
     if (incomingCall && !callState && dialerState === DialerState.Idle) {
       setDialerState(DialerState.Ringing);
-      dispatchCallState({ type: "full_update", newState: incomingCall });
+      dispatchCallState({ type: 'full_update', newState: incomingCall });
     }
     const validCall = currentCalls.find((call) => {
       if (call.callid && call.legid && callState?.callid && callState.legid) {
@@ -202,15 +190,9 @@ export const Dialer: React.FC<DialerProps> = ({
       }
       return undefined;
     });
-    if (
-      validCall === undefined &&
-      callState !== undefined &&
-      dialerState !== DialerState.Idle
-    ) {
+    if (validCall === undefined && callState !== undefined && dialerState !== DialerState.Idle) {
       const callEndStatus =
-        callState.status === PARTICIPANT_STATUS_CONNECTED
-          ? "COMPLETED"
-          : "CANCELED";
+        callState.status === PARTICIPANT_STATUS_CONNECTED ? 'COMPLETED' : 'CANCELED';
       extensions?.callEnded({
         callEndStatus,
       });
@@ -222,8 +204,9 @@ export const Dialer: React.FC<DialerProps> = ({
       }); // Hubspot call completed
 
       setDialerState(DialerState.Idle);
-      dispatchCallState({ type: "full_update", newState: undefined });
+      dispatchCallState({ type: 'full_update', newState: undefined });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- sourceCallerId intentionally not a trigger
   }, [
     dialerState,
     setDialerState,
@@ -237,24 +220,20 @@ export const Dialer: React.FC<DialerProps> = ({
   const renderButtons = () => {
     const content: ReactNode[] = [];
     for (let i = 1; i <= 12; i++) {
-      let symbol: string | number = "";
+      let symbol: string | number = '';
       if (i < 10) {
         symbol = i;
       } else if (i === 10) {
-        symbol = "*";
+        symbol = '*';
       } else if (i === 11) {
         symbol = 0;
       } else if (i === 12) {
-        symbol = "#";
+        symbol = '#';
       }
       content.push(
-        <button
-          onClick={() => setDialed((prev) => prev + symbol)}
-          className="btn-dialer"
-          key={i}
-        >
+        <button onClick={() => setDialed((prev) => prev + symbol)} className="btn-dialer" key={i}>
           {symbol}
-        </button>
+        </button>,
       );
     }
     return content;
@@ -262,14 +241,14 @@ export const Dialer: React.FC<DialerProps> = ({
 
   const onCallControlAction = useCallback(
     (action: CallControlParticipantAction) => {
-      setOperationDestination("");
+      setOperationDestination('');
       if (ccOpertation) {
         setCCOperation(undefined);
       } else {
         setCCOperation(action);
       }
     },
-    [setOperationDestination, ccOpertation, setCCOperation]
+    [setOperationDestination, ccOpertation, setCCOperation],
   );
 
   const handleCallControlParticipant = useCallback(async () => {
@@ -278,12 +257,9 @@ export const Dialer: React.FC<DialerProps> = ({
     }
     setIsOperationInProccess(true);
     try {
-      await onCallControlParticipant(
-        ccOpertation,
-        callState?.participantId,
-        operationDestination
-      );
-    } catch (e) {
+      await onCallControlParticipant(ccOpertation, callState?.participantId, operationDestination);
+    } catch {
+      // errors are surfaced by the caller; just reset UI state below
     } finally {
       setCCOperation(undefined);
       setIsOperationInProccess(false);
@@ -302,28 +278,26 @@ export const Dialer: React.FC<DialerProps> = ({
       setSwitchingDevice(true);
       try {
         await onDeviceSelect(id);
-      } catch (e) {
+      } catch {
+        // errors are surfaced by the caller; just reset UI state below
       } finally {
         setSwitchingDevice(false);
         setDialerState(DialerState.Idle);
-        dispatchCallState({ type: "full_update", newState: undefined });
+        dispatchCallState({ type: 'full_update', newState: undefined });
       }
     },
-    [onDeviceSelect]
+    [onDeviceSelect],
   );
 
   const handleOnDrop = async () => {
     setEnableForceDrop(false);
     try {
-      await onCallControlParticipant(
-        PARTICIPANT_CONTROL_DROP,
-        callState?.participantId
-      );
-    } catch (e) {
+      await onCallControlParticipant(PARTICIPANT_CONTROL_DROP, callState?.participantId);
+    } catch {
       setDialerState(DialerState.Idle);
     } finally {
       if (isOperationInProcess) {
-        setOperationDestination("");
+        setOperationDestination('');
         setIsOperationInProccess(false);
         setCCOperation(undefined);
       }
@@ -336,18 +310,16 @@ export const Dialer: React.FC<DialerProps> = ({
     if (isIncoming && callState.directControll) {
       setPerformingAnswer(true);
       try {
-        await onCallControlParticipant(
-          PARTICIPANT_CONTROL_ANSWER,
-          callState.participantId
-        );
-      } catch (e) {
+        await onCallControlParticipant(PARTICIPANT_CONTROL_ANSWER, callState.participantId);
+      } catch {
+        // errors are surfaced by the caller; just reset UI state below
       } finally {
         setPerformingAnswer(false);
       }
     } else if (phoneNumber?.length || dialedNumber.length) {
       try {
         await onMakeCall(phoneNumber || dialedNumber);
-        setDialed("");
+        setDialed('');
         if (dialerState !== DialerState.Dialing) {
           setDialerState(DialerState.Dialing);
           allowDropTimeout.current = setTimeout(() => {
@@ -361,7 +333,7 @@ export const Dialer: React.FC<DialerProps> = ({
             }
           }, 5000);
         }
-      } catch (e) {
+      } catch {
         setDialerState(DialerState.Idle);
         if (allowDropTimeout.current) {
           clearTimeout(allowDropTimeout.current);
@@ -407,25 +379,19 @@ export const Dialer: React.FC<DialerProps> = ({
                   <span className="text-center">{callState.party}</span>
                   <span
                     className={`flex items-center gap-1 font-bold text-sm animate-pulse ${
-                      dialerState === DialerState.Connected
-                        ? "text-green-500"
-                        : "text-yellow-400"
+                      dialerState === DialerState.Connected ? 'text-green-500' : 'text-yellow-400'
                     }`}
                   >
                     <svg
                       className={`w-[12px] h-[12px] ${
-                        dialerState === DialerState.Connected
-                          ? "fill-green-500"
-                          : "fill-yellow-400"
+                        dialerState === DialerState.Connected ? 'fill-green-500' : 'fill-yellow-400'
                       }`}
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 512 512"
                     >
                       <path d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z" />
                     </svg>
-                    {dialerState === DialerState.Connected
-                      ? "Connected"
-                      : "Dialing"}
+                    {dialerState === DialerState.Connected ? 'Connected' : 'Dialing'}
                   </span>
                 </div>
               ) : (
@@ -446,11 +412,7 @@ export const Dialer: React.FC<DialerProps> = ({
     <div className="w-[400px] h-[600px] bg-darkBg flex flex-col">
       <div>
         {devices && (
-          <Select
-            data={devices}
-            selectedId={activeDeviceId}
-            onSelect={handleActiveDevice}
-          />
+          <Select data={devices} selectedId={activeDeviceId} onSelect={handleActiveDevice} />
         )}
       </div>
       <div
@@ -461,9 +423,7 @@ export const Dialer: React.FC<DialerProps> = ({
         {dialerState === DialerState.Idle && (
           <div className="flex justify-end items-center">
             <BackSpaceBtn
-              onClickBS={() =>
-                setDialed(dialedNumber.substring(0, dialedNumber.length - 1))
-              }
+              onClickBS={() => setDialed(dialedNumber.substring(0, dialedNumber.length - 1))}
             />
           </div>
         )}
@@ -474,11 +434,7 @@ export const Dialer: React.FC<DialerProps> = ({
             onPerformingOperation={isOperationInProcess}
             destinationNumber={operationDestination}
             setDestinationNumber={setOperationDestination}
-            label={
-              ccOpertation === PARTICIPANT_CONTROL_TRANSFER_TO
-                ? "Transfer to:"
-                : "Divert to:"
-            }
+            label={ccOpertation === PARTICIPANT_CONTROL_TRANSFER_TO ? 'Transfer to:' : 'Divert to:'}
           />
         )}
       </div>
@@ -494,17 +450,14 @@ export const Dialer: React.FC<DialerProps> = ({
         />
       )}
       <div className="h-1/6 flex flex-row">
-        {(dialerState === DialerState.Idle ||
-          dialerState === DialerState.Ringing) && (
+        {(dialerState === DialerState.Idle || dialerState === DialerState.Ringing) && (
           <div className="flex justify-center items-center w-full">
             <button
               type="button"
               disabled={
                 switchingDevice ||
                 performingAnswer ||
-                (callState !== undefined
-                  ? callState.directControll !== true
-                  : false)
+                (callState !== undefined ? callState.directControll !== true : false)
               }
               onClick={() => handleCallAnswer()}
               className="flex justify-center items-center w-full h-full bg-green-500 hover:bg-green-700 disabled:bg-gray-400"
@@ -525,8 +478,7 @@ export const Dialer: React.FC<DialerProps> = ({
             <button
               disabled={
                 (switchingDevice ||
-                  (dialerState === DialerState.Dialing &&
-                    callState === undefined)) &&
+                  (dialerState === DialerState.Dialing && callState === undefined)) &&
                 !isForceDropEnabled
               }
               onClick={() => handleOnDrop()}

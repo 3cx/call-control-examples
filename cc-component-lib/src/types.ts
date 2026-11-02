@@ -5,7 +5,7 @@ import {
   PARTICIPANT_CONTROL_DROP,
   PARTICIPANT_CONTROL_ROUTE_TO,
   PARTICIPANT_CONTROL_TRANSFER_TO,
-} from "./constants";
+} from './constants';
 
 export interface DNDevice {
   dn?: string | null;
@@ -21,14 +21,14 @@ export type CallControlParticipantAction =
   | typeof PARTICIPANT_CONTROL_ATTACH_DATA;
 
 export interface CurrentCall {
-  participantId: CallParticipant["id"];
-  callid: CallParticipant["callid"];
-  legid: CallParticipant["legid"];
-  party: CallParticipant["party_caller_id"];
-  status: CallParticipant["status"];
-  name: CallParticipant["party_caller_name"];
-  directControll: CallParticipant["direct_control"];
-  attachedData: any;
+  participantId: CallParticipant['id'];
+  callid: CallParticipant['callid'];
+  legid: CallParticipant['legid'];
+  party: CallParticipant['party_caller_id'];
+  status: CallParticipant['status'];
+  name: CallParticipant['party_caller_name'];
+  directControll: CallParticipant['direct_control'];
+  attachedData: { engagementId?: number | null; [key: string]: unknown };
 }
 export interface CallParticipant {
   id?: number;

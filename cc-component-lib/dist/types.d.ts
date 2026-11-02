@@ -6,14 +6,17 @@ export interface DNDevice {
 }
 export type CallControlParticipantAction = typeof PARTICIPANT_CONTROL_DROP | typeof PARTICIPANT_CONTROL_ANSWER | typeof PARTICIPANT_CONTROL_DIVERT | typeof PARTICIPANT_CONTROL_ROUTE_TO | typeof PARTICIPANT_CONTROL_TRANSFER_TO | typeof PARTICIPANT_CONTROL_ATTACH_DATA;
 export interface CurrentCall {
-    participantId: CallParticipant["id"];
-    callid: CallParticipant["callid"];
-    legid: CallParticipant["legid"];
-    party: CallParticipant["party_caller_id"];
-    status: CallParticipant["status"];
-    name: CallParticipant["party_caller_name"];
-    directControll: CallParticipant["direct_control"];
-    attachedData: any;
+    participantId: CallParticipant['id'];
+    callid: CallParticipant['callid'];
+    legid: CallParticipant['legid'];
+    party: CallParticipant['party_caller_id'];
+    status: CallParticipant['status'];
+    name: CallParticipant['party_caller_name'];
+    directControll: CallParticipant['direct_control'];
+    attachedData: {
+        engagementId?: number | null;
+        [key: string]: unknown;
+    };
 }
 export interface CallParticipant {
     id?: number;

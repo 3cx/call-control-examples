@@ -1,5 +1,5 @@
-import { BackSpaceBtn } from "../BackSpaceBtn/BackSpaceBtnComponent";
-import { Spinner } from "../Spinner/SpinnerComponent";
+import { BackSpaceBtn } from '../BackSpaceBtn/BackSpaceBtnComponent';
+import { Spinner } from '../Spinner/SpinnerComponent';
 
 type TransferComponentProps = {
   onPerformingOperation: boolean;
@@ -31,18 +31,14 @@ export const TransferComponent: React.FC<TransferComponentProps> = ({
         onChange={(e) => setTransferNumber(e.target.value)}
       ></input>
       <BackSpaceBtn
-        onClickBS={() =>
-          setTransferNumber(
-            transferNumber.substring(0, transferNumber.length - 1)
-          )
-        }
+        onClickBS={() => setTransferNumber(transferNumber.substring(0, transferNumber.length - 1))}
       />
       <button
         disabled={transferNumber.length < 1 || performingTransfer}
         className="bg-green-500 p-2 rounded-md disabled:bg-gray-400"
         onClick={() => onTransfer()}
       >
-        {performingTransfer ? <Spinner /> : "Proceed"}
+        {performingTransfer ? <Spinner /> : 'Proceed'}
       </button>
     </div>
   );

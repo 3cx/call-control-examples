@@ -3,15 +3,9 @@ type SpinnerProps = {
 };
 export const Spinner: React.FC<SpinnerProps> = ({ color }) => {
   return (
-    <div
-      aria-label="Loading..."
-      role="status"
-      className="flex items-center space-x-2"
-    >
+    <div aria-label="Loading..." role="status" className="flex items-center space-x-2">
       <svg
-        className={`h-[30px] w-[30px] animate-spin ${
-          !!color ? "color" : "stroke-gray-500"
-        }`}
+        className={`h-[30px] w-[30px] animate-spin ${color ? 'color' : 'stroke-gray-500'}`}
         viewBox="0 0 256 256"
       >
         <line
