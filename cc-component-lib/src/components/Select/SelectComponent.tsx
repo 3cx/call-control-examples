@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
-import useOutsideClick from "../../hooks";
-import { DNDevice } from "../../types";
+import { useEffect, useRef, useState } from 'react';
+import useOutsideClick from '../../hooks';
+import { DNDevice } from '../../types';
 
 interface SelectProps {
   title?: string;
@@ -9,12 +9,7 @@ interface SelectProps {
   onSelect?: (id: string) => void;
 }
 
-export const Select: React.FC<SelectProps> = ({
-  title = "Select",
-  data,
-  selectedId,
-  onSelect,
-}) => {
+export const Select: React.FC<SelectProps> = ({ title = 'Select', data, selectedId, onSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
   useOutsideClick({
@@ -22,29 +17,26 @@ export const Select: React.FC<SelectProps> = ({
     handler: () => setIsOpen(false),
   });
   const [selectedItem, setSelected] = useState<DNDevice | undefined>(
-    selectedId ? data.find((item) => item.device_id === selectedId) : undefined
+    selectedId ? data.find((item) => item.device_id === selectedId) : undefined,
   );
 
   const handleChange = (item: DNDevice) => {
     setSelected(item);
-    onSelect && onSelect(item.device_id!);
+    onSelect?.(item.device_id!);
     setIsOpen(false);
   };
 
   useEffect(() => {
     if (selectedId && data) {
       const newSelected = data.find((item) => item.device_id === selectedId);
-      newSelected && setSelected(newSelected);
+      if (newSelected) setSelected(newSelected);
     } else {
       setSelected(undefined);
     }
   }, [selectedId, data]);
 
   return (
-    <div
-      ref={selectRef}
-      className="w-full relative inline-block text-left bg-darklight"
-    >
+    <div ref={selectRef} className="w-full relative inline-block text-left bg-darklight">
       <div className="group">
         <button
           type="button"

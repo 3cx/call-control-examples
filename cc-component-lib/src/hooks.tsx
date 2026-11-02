@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
 interface OutsideClickHandlerProps {
   ref: React.RefObject<HTMLElement | null>;
@@ -13,10 +13,10 @@ const useOutsideClick = ({ ref, handler }: OutsideClickHandlerProps) => {
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [ref, handler]);
 };
